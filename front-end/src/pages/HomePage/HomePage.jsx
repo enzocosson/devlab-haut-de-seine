@@ -21,7 +21,7 @@ function HomePage() {
         solidaire et durable.
       </h2>
       <div className={styles.buttons}>
-        <Link to="/dashboard/give" className={styles.give}>
+        <Link to="/dashboard" className={styles.give}>
           Proposez un don
         </Link>
       </div>
