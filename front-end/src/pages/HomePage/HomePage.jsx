@@ -24,9 +24,6 @@ function HomePage() {
         <Link to="/dashboard/give" className={styles.give}>
           Proposez un don
         </Link>
-        <Link to="/dashboard/search" className={styles.search}>
-          Découvrez les équipements
-        </Link>
       </div>
       <img src="/assets/images/map.png" alt="map" className={styles.map} />
     </main>
