@@ -8,10 +8,11 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import GivePage from "./pages/GivePage/GivePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import ProfilePage from "./pages/ProfilPage/ProfilPage";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 
 function AppContent() {
   const location = useLocation();
-  const isDashboard = location.pathname.startsWith("/dashboard");
+  const isDashboard = location.pathname.startsWith("/dashboard") || location.pathname.startsWith("/login") || location.pathname.startsWith("/register");
 
   return (
     <>
@@ -21,6 +22,8 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/register" element={<LoginPage />} />
+            <Route path="/login" element={<LoginPage />} />
         </Routes>
       </div>
     </>
