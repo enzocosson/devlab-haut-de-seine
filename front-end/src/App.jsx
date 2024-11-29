@@ -20,12 +20,7 @@ function AppContent() {
       <div className={styles.main}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route index element={<Navigate to="/dashboard/search" replace />} />
-            <Route path="give" element={<GivePage />} />
-            <Route path="search" element={<SearchPage />} />
-            <Route path="profile" element={<ProfilePage />} />
-          </Route>
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </>
