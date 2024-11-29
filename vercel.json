@@ -1,8 +1,9 @@
 {
-    "rewrites": [
+    "version": 2,
+    "builds": [
       {
-        "source": "/(.*)",
-        "destination": "/front-end/$1"
+        "src": "front-end/package.json",
+        "use": "@vercel/react"
       }
     ]
   }
