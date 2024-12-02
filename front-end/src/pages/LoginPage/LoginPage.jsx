@@ -49,7 +49,6 @@ function LoginPage() {
 
     const handleChangeForm = (e) => {
         const { name, value } = e.target;
-        console.log(name, value)
         setForm((prevForm) => ({ ...prevForm, [name]: value }));
     };
 
