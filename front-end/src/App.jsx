@@ -1,14 +1,12 @@
-import { Route, BrowserRouter as Router, Routes, Navigate, useLocation } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
 import styles from "./App.module.scss";
 import { AppContextProvider } from "./Context";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import Transition from "./components/Transition/Transition";
 import Dashboard from "./pages/Dashboard/Dashboard";  
-import GivePage from "./pages/GivePage/GivePage";
-import SearchPage from "./pages/SearchPage/SearchPage";
-import ProfilePage from "./pages/ProfilPage/ProfilPage";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import RegisterPage from "@/pages/LoginPage/RegisterPage.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -22,8 +20,8 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/register" element={<LoginPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </div>
     </>

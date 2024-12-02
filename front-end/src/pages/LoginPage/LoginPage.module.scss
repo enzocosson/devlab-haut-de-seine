@@ -63,7 +63,7 @@
           text-align: left;
           gap: 8px;
 
-          input {
+          input, select {
             padding: 12px 0;
             border: none;
             border-bottom: 1px solid var(--black);
@@ -86,13 +86,14 @@
         }
 
         .loginButton {
+          cursor: pointer;
           padding: 12px;
           background-color: var(--black);
           border-radius: 100px;
           color: var(--white);
         }
 
-        .googleLoginButton {
+        .googleLoginButton, .resetButton {
           padding: 12px;
           border: 1px solid var(--black);
           border-radius: 100px;
@@ -115,4 +116,8 @@
       text-decoration: none;
     }
   }
+}
+
+.pointer {
+  cursor: pointer;
 }
