@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useNavigate } from "react-router-dom"; // Pour la redirection
 import styles from "./Dashboard.module.scss";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const mapRef = useRef();
@@ -45,24 +46,36 @@ function Dashboard() {
   return (
     <div className={styles.dashboard}>
       <nav className={styles.navbar}>
-        <img
-          src="/assets/images/logo.svg"
-          alt="EcoConnect Logo"
-          className={styles.logo}
-        />
+        <Link to="/">
+          <img
+            src="/assets/images/logo.svg"
+            alt="EcoConnect Logo"
+            className={styles.logo}
+          />
+        </Link>
+
+        <div className={styles.container__profil}>
+          <div className={styles.container__profil__img}>
+            <img  className={styles.pp} src="/assets/images/pp.png" alt="" />
+          </div>
+          <div className={styles.container__profil__infos}>
+            <p className={styles.container__profil__infos__name}>User</p>
+            <p className={styles.container__profil__infos__email}>user@gmail.com</p>
+          </div>
+        </div>
       </nav>
 
       <div className={styles.container}>
-        {/* Slidebar */}
         <nav className={styles.slidebar}>
-          <h2>Points de dépôts</h2>
           <div className={styles.container__list}>
             <ul>
               {pointsRelais.map((point) => (
                 <li
                   key={point.id}
                   onClick={() => handlePointClick(point)}
-                  className={styles.pointItem}
+                  className={`${styles.pointItem} ${
+                    selectedPoint?.id === point.id ? styles.selectedPoint : ""
+                  }`}
                 >
                   {point.name}
                 </li>
@@ -85,7 +98,7 @@ function Dashboard() {
           <MapContainer
             center={[48.8397, 2.2399]}
             zoom={13}
-            style={{ height: "99%", width: "99%", zIndex: 0, borderRadius: 20 }}
+            style={{ height: "100%", width: "100%", zIndex: 0, borderRadius: 20 }}
             ref={mapRef}
           >
             <TileLayer
