@@ -1,7 +1,8 @@
 import HomePage from "./pages/HomePage/HomePage";
-import Dashboard from "./pages/Dashboard/Dashboard"; 
+import Dashboard from "./pages/Dashboard/Dashboard";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
-import RegisterPage from "@/pages/LoginPage/RegisterPage.jsx"; 
+import RegisterPage from "@/pages/LoginPage/RegisterPage.jsx";
+import Formulaire from "./pages/Formulaire/Formulaire";
 import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
@@ -10,7 +11,6 @@ import Transition from "./components/Transition/Transition";
 function AnimatedRoutes() {
   const location = useLocation();
 
-  
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
@@ -30,7 +30,7 @@ function AnimatedRoutes() {
             </Transition>
           }
         />
-         <Route
+        <Route
           path="/login"
           element={
             <Transition key="login">
@@ -38,7 +38,7 @@ function AnimatedRoutes() {
             </Transition>
           }
         />
-         <Route
+        <Route
           path="/register"
           element={
             <Transition key="register">
@@ -46,9 +46,16 @@ function AnimatedRoutes() {
             </Transition>
           }
         />
+
+        <Route
+          path="/formulaire"
+          element={
+            <Transition key="formulaire">
+              <Formulaire />
+            </Transition>
+          }
+        />
       </Routes>
-     
-    
     </AnimatePresence>
   );
 }
