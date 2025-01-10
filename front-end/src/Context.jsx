@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import PropTypes from 'prop-types';
 import { createContext, useContext, useState } from 'react';
 
@@ -6,13 +5,20 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const [isTest, setIsTest] = useState(false);
+  const [isTransitionFinished, setIsTransitionFinished] = useState(false);
 
   const appProps = {
     isTest,
-    setIsTest, 
+    setIsTest,
+    isTransitionFinished, 
+    setIsTransitionFinished
   };
 
-  return <AppContext.Provider value={appProps}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={appProps}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 AppContextProvider.propTypes = {

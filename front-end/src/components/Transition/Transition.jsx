@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
-import styles from "./Transition.module.scss";
+import style from "./Transition.module.scss";
 import { useAppContext } from "../../Context";
 import { useLocation } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const Transition = ({ children }) => {
       {children}
 
       <motion.div
-        className={styles.slideIn}
+        className={style.slideIn}
         initial={{ scaleY: 0, scaleX: 1 }}
         animate={{ scaleY: 0, scaleX: 1 }}
         exit={{ scaleY: 1, scaleX: 1 }}
@@ -29,7 +29,7 @@ const Transition = ({ children }) => {
       />
 
       <motion.div
-        className={styles.secondSlideIn}
+        className={style.secondSlideIn}
         initial={{ scaleY: 0, scaleX: 1 }}
         animate={{ scaleY: 0, scaleX: 1 }}
         exit={{ scaleY: 1, scaleX: 1 }}
@@ -38,7 +38,7 @@ const Transition = ({ children }) => {
       />
 
       <motion.div
-        className={styles.thirdSlideIn}
+        className={style.thirdSlideIn}
         initial={{ scaleY: 0, scaleX: 1 }}
         animate={{ scaleY: 0, scaleX: 1 }}
         exit={{ scaleY: 1, scaleX: 1 }}
@@ -47,7 +47,7 @@ const Transition = ({ children }) => {
       />
 
       <motion.div
-        className={styles.slideOut}
+        className={style.slideOut}
         initial={{ scaleY: 1, scaleX: 1 }}
         animate={{ scaleY: 0, scaleX: 1 }}
         exit={{ scaleY: 0, scaleX: 1 }}
@@ -59,7 +59,7 @@ const Transition = ({ children }) => {
       ></motion.div>
 
       <motion.div
-        className={styles.secondSlideOut}
+        className={style.secondSlideOut}
         initial={{ scaleY: 1, scaleX: 1 }}
         animate={{ scaleY: 0, scaleX: 1 }}
         exit={{ scaleY: 0, scaleX: 1 }}
@@ -78,7 +78,7 @@ const Transition = ({ children }) => {
             duration: 0.2,
             ease: "easeInOut",
           }}
-          className={styles.loader}
+          className={style.loader}
         ></motion.div>
       </motion.div>
     </>
