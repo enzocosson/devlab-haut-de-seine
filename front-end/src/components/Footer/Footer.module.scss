@@ -1,0 +1,98 @@
+.footer {
+  width: 100%;
+  background-color: var(--black);
+  color: var(--soft-white);
+  padding: 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .footerNewsletter {
+    padding: 40px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .newsletterChip {
+      padding: 4px 16px;
+      border: 1px solid var(--soft-white);
+      border-radius: 50px;
+    }
+
+    .subscription {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      gap: 24px;
+
+      .subscriptionInput {
+        display: flex;
+        gap: 16px;
+
+        input {
+          width: 100%;
+          padding: 8px 24px;
+          border: 1px solid var(--soft-white);
+          border-radius: 8px;
+          background-color: transparent;
+          color: var(--soft-white);
+
+          &::placeholder {
+            padding: 0;
+            color: var(--soft-white);
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        button {
+          padding: 12px 24px;
+          border: 1px solid var(--green);
+          border-radius: 8px;
+          background-color: var(--green);
+          color: var(--black);
+          transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+
+          &:hover {
+            border: 1px solid var(--soft-white);
+            background-color: var(--black);
+            color: var(--soft-white);
+          }
+        }
+      }
+    }
+  }
+
+  .footerSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 12px;
+      list-style: none;
+
+      li {
+        padding: 4px 18px;
+        border: 1px solid var(--soft-white);
+        border-radius: 24px;
+        transition: background-color 0.3s, border-color 0.3s;
+
+        a {
+          color: var(--soft-white);
+          text-decoration: none;
+        }
+
+        &:hover {
+          border: 1px solid var(--green);
+          background-color: var(--green);
+        }
+      }
+    }
+  }
+}

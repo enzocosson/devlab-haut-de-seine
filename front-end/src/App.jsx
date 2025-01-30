@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router, Routes, useLocation } from "react-route
 import styles from "./App.module.scss";
 import { AppContextProvider } from "./Context";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import AnimatedRoutes from "./AnimatedRoutes";
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
   return (
     <div className={styles.main}>
       {!isDashboard && <Header />}
-      <AnimatedRoutes /> 
+      <AnimatedRoutes />
+      {!isDashboard && <Footer />}
     </div>
   );
 }
