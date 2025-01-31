@@ -1,10 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .main {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-color: var(--white); 
+  justify-content: flex-start;
+  background-color: var(--white);
   overflow: hidden;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 100px);
+
+    .navbar{
+      width: 300px;
+      height: calc(100vh - 100px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 2rem;
+      gap: 0.5rem;
+
+      .navbar__top, .navbar__bottom{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+       gap: 1rem;
+      }
+
+
+      a{
+        width: 100%;
+        height: 55px;
+        background-color: rgba(245, 245, 245, 0);
+        color: var(--black);
+        padding: 0.5rem;
+        border-radius: 5px;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        transition: 200ms background-color ease-in-out;
+
+        &:hover{
+          background-color: rgb(245, 245, 245);
+        }
+      }
+
+      .logout{
+        background-color: #2a2a2a;
+        color: var(--white);
+
+        &:hover{
+          background-color: #414141;
+        }
+      }
+    }
+  }
 }

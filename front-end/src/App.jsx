@@ -1,41 +1,44 @@
-import { Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useLocation,
+  Link,
+} from "react-router-dom";
 import styles from "./App.module.scss";
 import { AppContextProvider } from "./Context";
 import Header from "./components/Header/Header";
-import HomePage from "./pages/HomePage/HomePage";
-import Transition from "./components/Transition/Transition";
-import Dashboard from "./pages/Dashboard/Dashboard";  
+import Footer from "./components/Footer/Footer";
+import AnimatedRoutes from "./AnimatedRoutes";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "@/pages/LoginPage/RegisterPage.jsx";
 
-function AppContent() {
-  const location = useLocation();
-  const isDashboard = location.pathname.startsWith("/dashboard") || location.pathname.startsWith("/login") || location.pathname.startsWith("/register");
-
-  return (
-    <>
-      <Transition />
-      {!isDashboard && <Header />}
-      <div className={styles.main}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-        </Routes>
-      </div>
-    </>
-  );
-}
-
 function App() {
+
+
+  const location = useLocation();
+  const showHeader =
+    location.pathname.startsWith("/login") ||
+    location.pathname.startsWith("/register");
+
   return (
-    <AppContextProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </AppContextProvider>
+    <div className={styles.main}>
+      {/* {!isDashboard && <Header />} */}
+      {!showHeader && <Header />}
+      <div className={styles.container}>
+        <AnimatedRoutes />
+      </div>
+    </div>
   );
 }
 
-export default App;
+export default function AppWrapper() {
+  return (
+    <Router>
+      <AppContextProvider>
+        <App />
+      </AppContextProvider>
+    </Router>
+  );
+}

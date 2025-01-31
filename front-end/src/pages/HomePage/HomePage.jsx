@@ -1,9 +1,11 @@
-// src/pages/LoginPage.jsx
+import Lenis from "lenis";
 import React from "react";
 import styles from "./HomePage.module.scss";
 import { Link } from "react-router-dom";
 
 function HomePage() {
+
+
   return (
     <main className={styles.main}>
       <img
@@ -21,7 +23,7 @@ function HomePage() {
         solidaire et durable.
       </h2>
       <div className={styles.buttons}>
-        <Link to="/dashboard" className={styles.give}>
+        <Link to="/dashboard/find-location" className={styles.give}>
           Proposez un don
         </Link>
       </div>

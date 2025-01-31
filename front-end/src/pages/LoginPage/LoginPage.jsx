@@ -71,6 +71,8 @@ function LoginPage() {
 
     return (
         <main className={styles.main}>
+            <div className={styles.bg__blur}></div>
+
             <div className={styles.hdsLogo}>
                 <Link to="/"><img src="/assets/images/logo-hds.png" alt="" /></Link>
             </div>
