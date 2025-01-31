@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import {
-  Route,
-  BrowserRouter as Router,
-  Routes,
-  useLocation,
-  Link,
+	Route,
+	BrowserRouter as Router,
+	Routes,
+	useLocation,
+	Link,
 } from "react-router-dom";
 import styles from "./App.module.scss";
 import { AppContextProvider } from "./Context";
@@ -15,30 +15,28 @@ import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "@/pages/LoginPage/RegisterPage.jsx";
 
 function App() {
+	const location = useLocation();
+	const showHeader =
+		location.pathname.startsWith("/login") ||
+		location.pathname.startsWith("/register");
 
-
-  const location = useLocation();
-  const showHeader =
-    location.pathname.startsWith("/login") ||
-    location.pathname.startsWith("/register");
-
-  return (
-    <div className={styles.main}>
-      {/* {!isDashboard && <Header />} */}
-      {!showHeader && <Header />}
-      <div className={styles.container}>
-        <AnimatedRoutes />
-      </div>
-    </div>
-  );
+	return (
+		<div className={styles.main}>
+			{/* {!isDashboard && <Header />} */}
+			{!showHeader && <Header />}
+			<div className={styles.container}>
+				<AnimatedRoutes />
+			</div>
+		</div>
+	);
 }
 
 export default function AppWrapper() {
-  return (
-    <Router>
-      <AppContextProvider>
-        <App />
-      </AppContextProvider>
-    </Router>
-  );
+	return (
+		<Router>
+			<AppContextProvider>
+				<App />
+			</AppContextProvider>
+		</Router>
+	);
 }
