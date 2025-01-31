@@ -35,7 +35,9 @@ function Formulaire() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form data submitted:", formData, photos);
-    navigate("/");
+
+    // Redirige vers la page de confirmation
+    navigate("/confirmation", { state: { formData, photos, mairie } });
   };
 
   return (
@@ -76,62 +78,63 @@ function Formulaire() {
 
           {/* Section Formulaire */}
           <form onSubmit={handleSubmit} className={styles.formSection}>
-  <div className={styles.formGroup}>
-    <input
-      type="text"
-      id="materialName"
-      name="materialName"
-      placeholder="Nom du matériel"
-      value={formData.materialName}
-      onChange={handleChange}
-      required
-    />
-  </div>
+            <div className={styles.formGroup}>
+              <input
+                type="text"
+                id="materialName"
+                name="materialName"
+                placeholder="Nom du matériel"
+                value={formData.materialName}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-  <div className={styles.formGroup}>
-    <select
-      id="materialType"
-      name="materialType"
-      value={formData.materialType}
-      onChange={handleChange}
-      required
-    >
-      <option value="" disabled>
-        Type de matériel
-      </option>
-      <option value="ordinateur">Ordinateur</option>
-      <option value="imprimante">Imprimante</option>
-      <option value="ecran">Écran</option>
-      <option value="autre">Autre</option>
-    </select>
-  </div>
+            <div className={styles.formGroup}>
+              <select
+                id="materialType"
+                name="materialType"
+                value={formData.materialType}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Type de matériel
+                </option>
+                <option value="ordinateur">Ordinateur</option>
+                <option value="imprimante">Imprimante</option>
+                <option value="ecran">Écran</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
 
-  <div className={styles.formGroup}>
-    <textarea
-      id="description"
-      name="description"
-      placeholder="Description du matériel"
-      value={formData.description}
-      onChange={handleChange}
-      required
-    />
-  </div>
+            <div className={styles.formGroup}>
+              <textarea
+                id="description"
+                name="description"
+                placeholder="Description du matériel"
+                value={formData.description}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-  <div className={styles.mapSection}>
-    <div className={styles.mapContainer}>
-      <iframe
-        title="Carte localisation"
-        src={`https://www.google.com/maps?q=${encodeURIComponent(mairie)}&output=embed`}
-        className={styles.map}
-      ></iframe>
-    </div>
-  </div>
+            <div className={styles.mapSection}>
+              <div className={styles.mapContainer}>
+                <iframe
+                  title="Carte localisation"
+                  src={`https://www.google.com/maps?q=${encodeURIComponent(
+                    mairie
+                  )}&output=embed`}
+                  className={styles.map}
+                ></iframe>
+              </div>
+            </div>
 
-  <button type="submit" className={styles.submitButton}>
-    Envoyer
-  </button>
-</form>
-
+            <button type="submit" className={styles.submitButton}>
+              Envoyer
+            </button>
+          </form>
         </div>
       </div>
     </div>

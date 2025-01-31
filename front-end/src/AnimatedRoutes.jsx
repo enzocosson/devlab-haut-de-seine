@@ -2,7 +2,10 @@ import HomePage from "./pages/HomePage/HomePage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "@/pages/LoginPage/RegisterPage.jsx";
+import Profil from "./pages/Profil/Profil.jsx";
+
 import Formulaire from "./pages/Formulaire/Formulaire";
+import Confirmation from "./pages/Confirmation/Confirmation";
 import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
@@ -23,35 +26,35 @@ function AnimatedRoutes() {
           }
         />
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
-            <Transition key="dashboard">
+            location.pathname === "/dashboard" ? (
+              <Transition key="dashboard">
+                <Dashboard />
+              </Transition>
+            ) : (
               <Dashboard />
-            </Transition>
+            )
           }
         />
-        <Route
-          path="/login"
-          element={
-            <Transition key="login">
-              <LoginPage />
-            </Transition>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <Transition key="register">
-              <RegisterPage />
-            </Transition>
-          }
-        />
+
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
 
         <Route
           path="/formulaire"
           element={
             <Transition key="formulaire">
               <Formulaire />
+            </Transition>
+          }
+        />
+
+        <Route
+          path="/confirmation"
+          element={
+            <Transition key="confirmation">
+              <Confirmation />
             </Transition>
           }
         />

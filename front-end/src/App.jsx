@@ -1,14 +1,21 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useLocation,
+  Link,
+} from "react-router-dom";
 import styles from "./App.module.scss";
 import { AppContextProvider } from "./Context";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import AnimatedRoutes from "./AnimatedRoutes";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import RegisterPage from "@/pages/LoginPage/RegisterPage.jsx";
 
 function App() {
-
   useEffect(() => {
     const lenis = new Lenis();
 
@@ -20,24 +27,28 @@ function App() {
     requestAnimationFrame(raf);
   }, []);
 
-
   const location = useLocation();
-  const isDashboard = location.pathname.startsWith("/dashboard") || location.pathname.startsWith("/login") || location.pathname.startsWith("/register");
+  const showHeader =
+    location.pathname.startsWith("/login") ||
+    location.pathname.startsWith("/register");
 
   return (
     <div className={styles.main}>
-      {!isDashboard && <Header />}
-      <AnimatedRoutes />
-      {!isDashboard && <Footer />}
+      {/* {!isDashboard && <Header />} */}
+      {!showHeader && <Header />}
+      <div className={styles.container}>
+       
+        <AnimatedRoutes />
+      </div>
     </div>
   );
 }
 
 export default function AppWrapper() {
   return (
-    <Router> 
+    <Router>
       <AppContextProvider>
-        <App /> 
+        <App />
       </AppContextProvider>
     </Router>
   );

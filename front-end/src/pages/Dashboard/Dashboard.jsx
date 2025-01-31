@@ -1,9 +1,21 @@
 import React, { useState, useRef } from "react";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useLocation,
+  Link,
+} from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useNavigate } from "react-router-dom"; // Pour la redirection
+import { Settings, Package, UserPen, LogOut, MapPin } from "lucide-react";
+
 import styles from "./Dashboard.module.scss";
-import { Link } from "react-router-dom";
+import Depot from "../Depot/Depot"
+import Map from "../Map/Map"
+import Profil from "../Profil/Profil"
+import TrackingDetails from "../TrackingDetails/TrackingDetails"
 
 function Dashboard() {
   const mapRef = useRef();
@@ -43,81 +55,58 @@ function Dashboard() {
     }
   };
 
+  const location = useLocation();
+
   return (
     <div className={styles.dashboard}>
-      <nav className={styles.navbar}>
-        <Link to="/">
-          <img
-            src="/assets/images/logo.svg"
-            alt="EcoConnect Logo"
-            className={styles.logo}
-          />
-        </Link>
-
-        <div className={styles.container__profil}>
-          <div className={styles.container__profil__img}>
-            <img  className={styles.pp} src="/assets/images/pp.png" alt="" />
-          </div>
-          <div className={styles.container__profil__infos}>
-            <p className={styles.container__profil__infos__name}>User</p>
-            <p className={styles.container__profil__infos__email}>user@gmail.com</p>
-          </div>
+      <div className={styles.navbar}>
+      <div className={styles.navbar__top}>
+          <Link
+            to="/dashboard/find-location"
+            className={location.pathname === "/find-location" ? styles.active : ""}
+          >
+            <MapPin />
+            Ou déposer ?
+          </Link>
+          <Link
+            to="/dashboard/profil"
+            className={
+              location.pathname === "/dashboard/profil" ? styles.active : ""
+            }
+          >
+            <UserPen />
+            Mon profil
+          </Link>
+          <Link
+            to="/dashboard/depot"
+            className={
+              location.pathname === "/dashboard/depot" ? styles.active : ""
+            }
+          >
+            <Package />
+            Mes Dépots
+          </Link>
         </div>
-      </nav>
+
+        <div className={styles.navbar__bottom}>
+          <Link to="/settings">
+            <Settings />
+            Paramètres
+          </Link>
+          <Link className={styles.logout} to="/logout">
+            <LogOut />
+            Déconnexion
+          </Link>
+        </div>
+      </div>
 
       <div className={styles.container}>
-        <nav className={styles.slidebar}>
-          <div className={styles.container__list}>
-            <ul>
-              {pointsRelais.map((point) => (
-                <li
-                  key={point.id}
-                  onClick={() => handlePointClick(point)}
-                  className={`${styles.pointItem} ${
-                    selectedPoint?.id === point.id ? styles.selectedPoint : ""
-                  }`}
-                >
-                  {point.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
-
-        {/* Carte Interactive */}
-        <div className={styles.map}>
-          {" "}
-          {selectedPoint && (
-            <button
-              className={styles.depositButton}
-              onClick={handleDepositClick}
-            >
-              Déposer ici
-            </button>
-          )}
-          <MapContainer
-            center={[48.8397, 2.2399]}
-            zoom={13}
-            style={{ height: "100%", width: "100%", zIndex: 0, borderRadius: 20 }}
-            ref={mapRef}
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {pointsRelais.map((point) => (
-              <Marker
-                key={point.id}
-                position={[point.lat, point.lng]}
-                eventHandlers={{
-                  click: () => setSelectedPoint(point),
-                }}
-              >
-                <Popup>{point.name}</Popup>
-              </Marker>
-            ))}
-          </MapContainer>
-        </div>
+        <Routes>
+          <Route path="/find-location" element={<Map />} />
+          <Route path="/profil" element={<Profil />} />
+          <Route path="/depot" element={<Depot />} />
+          <Route path="/tracking/:trackingNumber" element={<TrackingDetails />} />
+        </Routes>
       </div>
     </div>
   );
