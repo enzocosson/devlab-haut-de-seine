@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Lenis from "lenis";
 import {
   Route,
   BrowserRouter as Router,
@@ -16,16 +15,7 @@ import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "@/pages/LoginPage/RegisterPage.jsx";
 
 function App() {
-  useEffect(() => {
-    const lenis = new Lenis();
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-  }, []);
 
   const location = useLocation();
   const showHeader =
@@ -37,7 +27,6 @@ function App() {
       {/* {!isDashboard && <Header />} */}
       {!showHeader && <Header />}
       <div className={styles.container}>
-       
         <AnimatedRoutes />
       </div>
     </div>

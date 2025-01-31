@@ -6,9 +6,10 @@ function Formulaire() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Extraire la mairie depuis les paramètres de l'URL
   const searchParams = new URLSearchParams(location.search);
   const mairie = searchParams.get("mairie");
+
+  const userId = "123456"; // Remplace ceci par la vraie récupération de l'ID utilisateur
 
   const [formData, setFormData] = useState({
     materialName: "",
@@ -24,20 +25,34 @@ function Formulaire() {
   };
 
   const handlePhotoUpload = (e, index) => {
-    const newPhotos = [...photos];
     if (e.target.files && e.target.files[0]) {
-      // Ajoute la photo au début de la liste, en remplaçant si nécessaire
-      newPhotos.splice(index, 1, e.target.files[0]);
-      setPhotos(newPhotos);
+      const file = e.target.files[0];
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setPhotos((prev) => {
+          const newPhotos = [...prev];
+          newPhotos[index] = reader.result; // Stockage en base64
+          return newPhotos;
+        });
+      };
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form data submitted:", formData, photos);
 
-    // Redirige vers la page de confirmation
-    navigate("/confirmation", { state: { formData, photos, mairie } });
+    const qrCodeData = {
+      userId,
+      mairie,
+      ...formData,
+      photos,
+    };
+
+    console.log("Form data submitted:", qrCodeData);
+
+    navigate("/confirmation", { state: { qrCodeData } });
   };
 
   return (
@@ -54,7 +69,7 @@ function Formulaire() {
                   style={{
                     backgroundColor: photos[index] ? "transparent" : "#ccc",
                     backgroundImage: photos[index]
-                      ? `url(${URL.createObjectURL(photos[index])})`
+                      ? `url(${photos[index]})`
                       : "none",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
@@ -76,7 +91,6 @@ function Formulaire() {
             </div>
           </div>
 
-          {/* Section Formulaire */}
           <form onSubmit={handleSubmit} className={styles.formSection}>
             <div className={styles.formGroup}>
               <input
