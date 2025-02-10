@@ -16,6 +16,7 @@ import {
 function Header() {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
+	const [logged, setLogged] = useState("");
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -24,9 +25,11 @@ function Header() {
 				const decodedToken = jwtDecode(token);
 				setEmail(decodedToken.email);
 				console.log(decodedToken.email);
+				setLogged(true);
 			} catch (error) {
 				console.error("Erreur lors du décodage du token:", error);
 				navigate("/login");
+				setLogged(false);
 			}
 		}
 	}, []);
@@ -62,7 +65,11 @@ function Header() {
 					<DropdownMenuItem>Mon profil</DropdownMenuItem>
 					<DropdownMenuItem>Mes dépots</DropdownMenuItem>
 					<DropdownMenuItem>
-						<button onClick={handleLogout}> Se déconnecter</button>
+						{logged ? (
+							<button onClick={handleLogout}> Se déconnecter</button>
+						) : (
+							<Link to="/login">Se Connecter</Link>
+						)}
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
