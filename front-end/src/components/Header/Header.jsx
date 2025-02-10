@@ -31,6 +31,11 @@ function Header() {
 		}
 	}, []);
 
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		navigate("/login");
+	};
+
 	return (
 		<header className={styles.header}>
 			<Link to="/">
@@ -56,7 +61,9 @@ function Header() {
 				<DropdownMenuContent className={styles.dropdown}>
 					<DropdownMenuItem>Mon profil</DropdownMenuItem>
 					<DropdownMenuItem>Mes dépots</DropdownMenuItem>
-					<DropdownMenuItem>Se déconnecter</DropdownMenuItem>
+					<DropdownMenuItem>
+						<button onClick={handleLogout}> Se déconnecter</button>
+					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</header>

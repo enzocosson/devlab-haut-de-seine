@@ -19,9 +19,6 @@ function RegisterPage() {
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		if (token) navigate("/");
-
 		const getCommunes = async () => {
 			try {
 				const data = await fetchCommunes();

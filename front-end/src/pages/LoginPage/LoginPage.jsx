@@ -19,11 +19,6 @@ function LoginPage() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	useEffect(() => {
-		const token = localStorage.getItem("token");
-		if (token) navigate("/");
-	}, []);
-
 	const handleCheckboxChange = (event) => {
 		setIsRemembered(event.target.checked);
 	};
