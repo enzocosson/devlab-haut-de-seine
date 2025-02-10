@@ -16,6 +16,7 @@ import {
 function Header() {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
+	const [name, setName] = useState("");
 	const [logged, setLogged] = useState("");
 
 	useEffect(() => {
@@ -24,6 +25,7 @@ function Header() {
 			try {
 				const decodedToken = jwtDecode(token);
 				setEmail(decodedToken.email);
+				setName(decodedToken.name);
 				console.log(decodedToken.email);
 				setLogged(true);
 			} catch (error) {
@@ -48,31 +50,32 @@ function Header() {
         <Link to="/login" className={styles.login}>Connexion</Link>
         <Link to="/register" className={styles.signup}>Inscription</Link>
       </div> */}
-
-			<DropdownMenu>
-				<DropdownMenuTrigger>
-					<div className={styles.container__profil}>
-						<div className={styles.container__profil__img}>
-							<img className={styles.pp} src="/assets/images/pp.png" alt="" />
+			{logged ? (
+				<DropdownMenu>
+					<DropdownMenuTrigger>
+						<div className={styles.container__profil}>
+							<div className={styles.container__profil__img}>
+								<img className={styles.pp} src="/assets/images/pp.png" alt="" />
+							</div>
+							<div className={styles.container__profil__infos}>
+								<p className={styles.container__profil__infos__name}>{name}</p>
+								<p className={styles.container__profil__infos__email}>
+									{email}
+								</p>
+							</div>
 						</div>
-						<div className={styles.container__profil__infos}>
-							<p className={styles.container__profil__infos__name}>User</p>
-							<p className={styles.container__profil__infos__email}>{email}</p>
-						</div>
-					</div>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent className={styles.dropdown}>
-					<DropdownMenuItem>Mon profil</DropdownMenuItem>
-					<DropdownMenuItem>Mes dépots</DropdownMenuItem>
-					<DropdownMenuItem>
-						{logged ? (
+					</DropdownMenuTrigger>
+					<DropdownMenuContent className={styles.dropdown}>
+						<DropdownMenuItem>Mon profil</DropdownMenuItem>
+						<DropdownMenuItem>Mes dépots</DropdownMenuItem>
+						<DropdownMenuItem>
 							<button onClick={handleLogout}> Se déconnecter</button>
-						) : (
-							<Link to="/login">Se Connecter</Link>
-						)}
-					</DropdownMenuItem>
-				</DropdownMenuContent>
-			</DropdownMenu>
+						</DropdownMenuItem>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			) : (
+				<Link to="/login">Se Connecter</Link>
+			)}
 		</header>
 	);
 }
