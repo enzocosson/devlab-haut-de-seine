@@ -27,7 +27,6 @@ function Dashboard() {
 		if (token)
 			try {
 				const decodedToken = jwtDecode(token);
-				console.log(decodedToken.email);
 				setLogged(true);
 			} catch (error) {
 				console.error("Erreur lors du décodage du token:", error);
@@ -77,10 +76,6 @@ function Dashboard() {
 				</div>
 
 				<div className={styles.navbar__bottom}>
-					<Link to="/settings">
-						<Settings />
-						Paramètres
-					</Link>
 					<Link className={styles.logout} to="/login">
 						<LogOut />
 						<button onClick={handleLogout}> Se déconnecter</button>

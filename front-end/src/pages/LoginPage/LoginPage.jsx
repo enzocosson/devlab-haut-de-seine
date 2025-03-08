@@ -11,17 +11,12 @@ function LoginPage() {
 
 	const [loading, setLoading] = useState(false);
 	// const [form, setForm] = useState({ email: "", password: "" });
-	const [isRemembered, setIsRemembered] = useState(false);
 	const [forgetPassword, setForgetPassword] = useState(false);
 	const [emailAccount, setEmailAccount] = useState("");
 	const [resetPassword, setResetPassword] = useState(false);
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
-	const handleCheckboxChange = (event) => {
-		setIsRemembered(event.target.checked);
-	};
 
 	// const checkLogin = async () => {
 	//     setLoading(true);
@@ -129,14 +124,6 @@ function LoginPage() {
 									/>
 								</div>
 								<div className={styles.loginCredential}>
-									<div className={styles.storeCredential}>
-										<input
-											type="checkbox"
-											checked={isRemembered}
-											onChange={handleCheckboxChange}
-										/>
-										<p>Se souvenir</p>
-									</div>
 									<p className={styles.pointer} onClick={handlePassword}>
 										Mot de passe oublié ?
 									</p>
@@ -148,23 +135,13 @@ function LoginPage() {
 								>
 									{loading ? <CircularProgress /> : "Se connecter"}
 								</button>
-								<div
-									className={styles.googleLoginButton}
-									style={{ cursor: "pointer" }}
-								>
-									<img
-										src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
-										alt="logo_google"
-									/>
-									Se connecter avec Google
-								</div>
 							</form>
 						</div>
 
 						<div>
-							Je n'ai pas de compte ?{" "}
+							Vous n'avez pas de compte ?{" "}
 							<span>
-								<Link to="/register">S'inscrire</Link>
+								<Link to="/register">Inscrivez-vous</Link>
 							</span>
 						</div>
 					</>

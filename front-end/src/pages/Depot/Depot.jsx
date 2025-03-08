@@ -22,7 +22,6 @@ function Depot() {
 					},
 				});
 				const data = await response.json();
-				console.log(data);
 				setLogs(data);
 			} catch (error) {
 				console.error("Erreur lors de la récupération des logs:", error);

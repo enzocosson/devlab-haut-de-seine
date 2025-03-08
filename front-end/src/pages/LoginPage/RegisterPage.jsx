@@ -98,7 +98,7 @@ function RegisterPage() {
 								onChange={handleChangeForm}
 								required
 							>
-								<option value="">Select a city</option>
+								<option value="">- Selectionnez une ville</option>
 								{communes.map((city, index) => (
 									<option key={index} value={city.nom}>
 										{city.nom}
@@ -131,20 +131,13 @@ function RegisterPage() {
 						<button type="submit" className={styles.loginButton}>
 							S'inscrire
 						</button>
-						<div className={styles.googleLoginButton}>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
-								alt="logo_google"
-							/>
-							S'inscrire avec Google
-						</div>
 					</form>
 				</div>
 
 				<div>
-					J'ai un compte ?{" "}
+					Vous avez déjà un compte ?{" "}
 					<span>
-						<Link to="/login">Se connecter</Link>
+						<Link to="/login">Connectez-vous</Link>
 					</span>
 				</div>
 			</div>
