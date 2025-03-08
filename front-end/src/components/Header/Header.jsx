@@ -65,8 +65,12 @@ function Header() {
 						</div>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent className={styles.dropdown}>
-						<DropdownMenuItem>Mon profil</DropdownMenuItem>
-						<DropdownMenuItem>Mes dépots</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link to="/dashboard/profil">Mon profil</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link to="/dashboard/depot">Mes dépots</Link>
+						</DropdownMenuItem>
 						<DropdownMenuItem>
 							<button onClick={handleLogout}> Se déconnecter</button>
 						</DropdownMenuItem>
