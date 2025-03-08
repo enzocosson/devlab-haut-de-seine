@@ -77,7 +77,11 @@ function Header() {
 					</DropdownMenuContent>
 				</DropdownMenu>
 			) : (
-				<Link to="/login">Se Connecter</Link>
+				<div className={styles.buttons}>
+					<Link to="/login" className={styles.give}>
+						Se Connecter
+					</Link>
+				</div>
 			)}
 		</header>
 	);
