@@ -26,7 +26,6 @@ function Header() {
 				const decodedToken = jwtDecode(token);
 				setEmail(decodedToken.email);
 				setName(decodedToken.name);
-				console.log(decodedToken.email);
 				setLogged(true);
 			} catch (error) {
 				console.error("Erreur lors du décodage du token:", error);

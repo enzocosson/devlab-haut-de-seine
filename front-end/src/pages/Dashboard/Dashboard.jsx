@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	Route,
 	BrowserRouter as Router,
@@ -6,9 +6,8 @@ import {
 	useLocation,
 	Link,
 } from "react-router-dom";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useNavigate } from "react-router-dom"; // Pour la redirection
+import { useNavigate } from "react-router-dom";
 import { Settings, Package, UserPen, LogOut, MapPin } from "lucide-react";
 
 import styles from "./Dashboard.module.scss";
@@ -19,11 +18,8 @@ import TrackingDetails from "../TrackingDetails/TrackingDetails";
 import { jwtDecode } from "jwt-decode";
 
 function Dashboard() {
-	const mapRef = useRef();
-	const [selectedPoint, setSelectedPoint] = useState(null);
 	const navigate = useNavigate(); // Hook pour la navigation
 	const [logged, setLogged] = useState("");
-	const [collectionPoints, setCollectionPoints] = useState([]);
 
 	useEffect(() => {
 		setLogged(false);
