@@ -16,12 +16,12 @@ import Depot from "../Depot/Depot";
 import Map from "../Map/Map";
 import Profil from "../Profil/Profil";
 import TrackingDetails from "../TrackingDetails/TrackingDetails";
-
 import { jwtDecode } from "jwt-decode";
 
 function Dashboard() {
 	const mapRef = useRef();
 	const navigate = useNavigate(); // Hook pour la navigation
+	const [logged, setLogged] = useState("");
 	const [pointsRelais, setPointsRelais] = useState([
 		{
 			id: 1,
@@ -41,10 +41,18 @@ function Dashboard() {
 	]);
 
 	useEffect(() => {
+		setLogged(false);
 		const token = localStorage.getItem("token");
-		if (!token) {
-			navigate("/login");
-		}
+		if (token)
+			try {
+				const decodedToken = jwtDecode(token);
+				console.log(decodedToken.email);
+				setLogged(true);
+			} catch (error) {
+				console.error("Erreur lors du décodage du token:", error);
+				setLogged(false);
+			}
+		else navigate("/login");
 	}, []);
 
 	const [selectedPoint, setSelectedPoint] = useState(null);
@@ -66,11 +74,12 @@ function Dashboard() {
 
 	const handleLogout = () => {
 		localStorage.removeItem("token");
+		navigate("/login");
 	};
 
 	const location = useLocation();
 
-	return (
+	return logged ? (
 		<div className={styles.dashboard}>
 			<div className={styles.navbar}>
 				<div className={styles.navbar__top}>
@@ -127,6 +136,8 @@ function Dashboard() {
 				</Routes>
 			</div>
 		</div>
+	) : (
+		""
 	);
 }
 
