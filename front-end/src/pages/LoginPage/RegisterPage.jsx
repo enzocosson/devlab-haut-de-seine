@@ -2,46 +2,43 @@
 import React, { useEffect, useState } from "react";
 import styles from "./LoginPage.module.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchCommunes } from "@/pages/LoginPage/LogAPI.jsx";
 
 function RegisterPage() {
 	const navigate = useNavigate();
-
-	const [communes, setCommunes] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [form, setForm] = useState({
-		last_name: "",
-		first_name: "",
-		city: "",
+	const [userForm, setUserForm] = useState({
+		nom: "",
+		prenom: "",
+		adresse: "",
 		email: "",
 		password: "",
+		tel: "",
 	});
-	const [error, setError] = useState(null);
 
-	useEffect(() => {
-		const getCommunes = async () => {
-			try {
-				const data = await fetchCommunes();
-				setCommunes(data.results);
-			} catch (err) {
-				setError(err.message || "Error fetching data");
-			} finally {
-				setLoading(false);
-			}
-		};
-		getCommunes();
-	}, []);
-
-	const registerUser = (e) => {
+	const insertUser = async (e) => {
 		e.preventDefault();
-		console.log("Form submitted", form);
-		// Add registration logic here (e.g., API call)
-		navigate("/dashboard");
+
+		const response = await fetch("http://localhost:3333/api/users", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(userForm),
+		});
+
+		const isError = response.ok;
+		if (isError) navigate("/login");
+		else {
+			alert("Erreur lors de la création de l'utilisateur");
+			console.error(
+				"Erreur lors de la création de l'utilisateur:",
+				response.statusText
+			);
+		}
 	};
 
 	const handleChangeForm = (e) => {
 		const { name, value } = e.target;
-		setForm((prevForm) => ({ ...prevForm, [name]: value }));
+		setUserForm((prevForm) => ({ ...prevForm, [name]: value }));
 	};
 
 	return (
@@ -65,46 +62,55 @@ function RegisterPage() {
 						<p>Entrez vos informations pour créer votre compte</p>
 					</div>
 
-					<form onSubmit={registerUser}>
+					<form onSubmit={insertUser}>
 						<div className={styles.fullName}>
 							<div className={styles.loginInput}>
-								<label htmlFor="last_name">Nom</label>
+								<label htmlFor="nom">Nom</label>
 								<input
 									type="text"
-									name="last_name"
+									name="nom"
 									placeholder="ex : Legrand"
-									value={form.last_name}
+									value={userForm.nom}
 									onChange={handleChangeForm}
 									required
 								/>
 							</div>
 							<div className={styles.loginInput}>
-								<label htmlFor="first_name">Prénom</label>
+								<label htmlFor="prenom">Prénom</label>
 								<input
 									type="text"
-									name="first_name"
+									name="prenom"
 									placeholder="ex : Carole"
-									value={form.first_name}
+									value={userForm.prenom}
 									onChange={handleChangeForm}
 									required
 								/>
 							</div>
 						</div>
-						<div className={styles.loginInput}>
-							<label htmlFor="city">Ville</label>
-							<select
-								name="city"
-								value={form.city}
-								onChange={handleChangeForm}
-								required
-							>
-								<option value="">- Selectionnez une ville</option>
-								{communes.map((city, index) => (
-									<option key={index} value={city.nom}>
-										{city.nom}
-									</option>
-								))}
-							</select>
+						<div className={styles.fullName}>
+							<div className={styles.loginInput}>
+								<label htmlFor="email">Adresse</label>
+								<input
+									type="text"
+									name="adresse"
+									placeholder="11 rue Général de Gaulle"
+									value={userForm.adresse}
+									onChange={handleChangeForm}
+									required
+								/>
+							</div>
+							<div className={styles.loginInput}>
+								<label htmlFor="tel">Téléphone</label>
+								<input
+									type="text"
+									maxLength="10"
+									name="tel"
+									placeholder="0602030605"
+									value={userForm.tel}
+									onChange={handleChangeForm}
+									required
+								/>
+							</div>
 						</div>
 						<div className={styles.loginInput}>
 							<label htmlFor="email">Email</label>
@@ -112,7 +118,7 @@ function RegisterPage() {
 								type="email"
 								name="email"
 								placeholder="ex : carole@gmail.fr"
-								value={form.email}
+								value={userForm.email}
 								onChange={handleChangeForm}
 								required
 							/>
@@ -123,7 +129,7 @@ function RegisterPage() {
 								type="password"
 								name="password"
 								placeholder="Entrez votre mot de passe"
-								value={form.password}
+								value={userForm.password}
 								onChange={handleChangeForm}
 								required
 							/>
