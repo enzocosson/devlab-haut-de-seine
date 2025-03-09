@@ -93,7 +93,7 @@ function RegisterPage() {
 								<input
 									type="text"
 									name="adresse"
-									placeholder="11 rue Général de Gaulle"
+									placeholder="ex : 11 rue Général de Gaulle"
 									value={userForm.adresse}
 									onChange={handleChangeForm}
 									required
@@ -105,7 +105,7 @@ function RegisterPage() {
 									type="text"
 									maxLength="10"
 									name="tel"
-									placeholder="0602030605"
+									placeholder="ex : 0602030605"
 									value={userForm.tel}
 									onChange={handleChangeForm}
 									required
