@@ -6,12 +6,14 @@ import { useNavigate } from "react-router-dom";
 function Profil() {
 	const [userInfo, setUserInfo] = useState({
 		nom: "",
+		prenom: "",
 		email: "",
 		adresse: "",
 		tel: "",
 	});
 	const [userInfoBackup, setUserInfoBackup] = useState({
 		nom: "",
+		prenom: "",
 		email: "",
 		adresse: "",
 		tel: "",
@@ -101,6 +103,19 @@ function Profil() {
 						/>
 					) : (
 						<span>{userInfo.nom}</span>
+					)}
+				</label>
+				<label>
+					Prenom :
+					{isEditing ? (
+						<input
+							type="text"
+							name="prenom"
+							value={userInfo.prenom}
+							onChange={handleInputChange}
+						/>
+					) : (
+						<span>{userInfo.prenom}</span>
 					)}
 				</label>
 				<label>
