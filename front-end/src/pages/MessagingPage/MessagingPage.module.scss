@@ -1,0 +1,284 @@
+.messagingFrame {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start
+}
+
+.messagingList{
+    border: black solid 2px;
+}  
+
+.messagingListFilter[type=text] {
+    width: 100%;
+  border: black solid 2px;
+  background: transparent;
+}
+
+.messagingListSearchSection {
+    position: relative;
+}
+
+.messagingListInput[type="text"] {
+    display: block;
+    width: 100%;
+  //   font-size: 0.875rem; // text-sm
+    border: 2px solid black; // border-gray-300
+    border-radius: 0.5rem; // rounded-lg
+    background-color: #f9fafb; // bg-gray-50
+
+  //   // dark mode
+  //   @media (prefers-color-scheme: dark) {
+  //     background-color: #374151; // dark:bg-gray-700
+  //     border-color: #4b5563; // dark:border-gray-600
+  //     color: white; // dark:text-white
+
+  //     &::placeholder {
+  //       color: #9ca3af; // dark:placeholder-gray-400
+  //     }
+
+  //     &:focus {
+  //       ring-color: #3b82f6; // dark:focus:ring-blue-500
+  //       border-color: #3b82f6; // dark:focus:border-blue-500
+  //     }
+  //   }
+}
+
+.searchButton {
+    position: absolute;
+    right: 0rem; // end-2.5
+    bottom: 0rem; // bottom-2.5
+    // dark mode
+    //   @media (prefers-color-scheme: dark) {
+    //     background-color: #4f46e5; // dark:bg-blue-600
+  
+    //     &:hover {
+    //       background-color: #4338ca; // dark:hover:bg-blue-700
+    //     }
+  
+    //     &:focus {
+    //       ring-color: #3b82f6; // dark:focus:ring-blue-800
+    //     }
+    //   }
+}
+
+.messagingConversation {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: black solid 2px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.conversationContainer {
+    border: black solid 2px;
+    margin: 4px;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+.conversationHeader{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+
+.adresseeInfo {
+    display: flex;
+}
+
+.conversationFilter {
+    display: flex;
+}
+
+.adresseeInfo {
+    gap: 4px
+}
+
+.conversationFilter {
+    gap: 2px
+}
+
+.conversationMessages {
+    overflow-y: scroll;
+}
+
+.singleMessageDisplay {
+    display: flex;
+    // flex-direction: row-reverse; // when it is the user message
+}
+
+.singleMessageSecondDisplay {
+    width: 83.333333%;
+}
+
+.adreseeMessageInfos {
+    display: flex;
+    gap: 4px;
+}
+
+.message {
+    max-width: 500px;
+}
+
+.senderSingleMessageDisplay {
+  display: flex;
+  flex-direction: row-reverse; // when it is the user message
+}
+
+.senderSingleMessageSecondDisplay {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 83.333333%;
+}
+
+.senderSingleMessageThirdDisplay {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr)); 
+}
+
+.senderMessageInfos {
+  display: flex;
+  gap: 4px;
+}
+
+.senderMessage {
+  display: flex;
+  flex-direction: row-reverse;
+  max-width: 500px;
+}
+
+.messageBox {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    border-radius: 10px;
+    border: 1px solid rgb(63, 63, 63);
+  }
+  .messageBox:focus-within {
+    border: 1px solid rgb(110, 110, 110);
+  }
+  .searchWrapper {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  #file {
+    display: none;
+  }
+  .searchWrapper label {
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+//   .fileUploadWrapper label svg {
+//     height: 18px;
+//   }
+//   .fileUploadWrapper label svg path {
+//     transition: all 0.3s;
+//   }
+//   .fileUploadWrapper label svg circle {
+//     transition: all 0.3s;
+//   }
+//   .fileUploadWrapper label:hover svg path {
+//     stroke: #fff;
+//   }
+//   .fileUploadWrapper label:hover svg circle {
+//     stroke: #fff;
+//     fill: #3c3c3c;
+//   }
+//   .fileUploadWrapper label:hover .tooltip {
+//     display: block;
+//     opacity: 1;
+//   }
+  .tooltip {
+    position: absolute;
+    top: -40px;
+    display: none;
+    opacity: 0;
+    color: white;
+    font-size: 10px;
+    text-wrap: nowrap;
+    background-color: #000;
+    padding: 6px 10px;
+    border: 1px solid #3c3c3c;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.596);
+    transition: all 0.3s;
+  }
+  #messageInput {
+    width: 200px;
+    height: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    color: white;
+  }
+//   #messageInput:focus ~ #sendButton svg path,
+//   #messageInput:valid ~ #sendButton svg path {
+//     fill: #3c3c3c;
+//     stroke: white;
+//   }
+  
+#imageUploadButton {
+    width: fit-content;
+    height: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+//   #imageUploadButton svg {
+//     height: 18px;
+//     transition: all 0.3s;
+//   }
+//   #imageUploadButton svg path {
+//     transition: all 0.3s;
+//   }
+//   #imageUploadButton:hover svg path {
+//     fill: #3c3c3c;
+//     stroke: white;
+//   }
+
+  #sendButton {
+    width: fit-content;
+    height: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+//   #sendButton svg {
+//     height: 18px;
+//     transition: all 0.3s;
+//   }
+//   #sendButton svg path {
+//     transition: all 0.3s;
+//   }
+//   #sendButton:hover svg path {
+//     fill: #3c3c3c;
+//     stroke: white;
+//   }
+  

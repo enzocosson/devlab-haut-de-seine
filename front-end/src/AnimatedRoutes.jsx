@@ -10,6 +10,7 @@ import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import Transition from "./components/Transition/Transition";
+import MessagingPage from "./pages/MessagingPage/MessagingPage.jsx";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -56,6 +57,14 @@ function AnimatedRoutes() {
             <Transition key="confirmation">
               <Confirmation />
             </Transition>
+          }
+        />
+        <Route
+          path="/message"
+          element={
+            // <Transition key="formulaire">
+              <MessagingPage />
+            // </Transition>
           }
         />
       </Routes>
