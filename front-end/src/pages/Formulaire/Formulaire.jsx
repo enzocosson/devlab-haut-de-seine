@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Formulaire.module.scss";
+import { jwtDecode } from "jwt-decode";
 
 function Formulaire() {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const searchParams = new URLSearchParams(location.search);
-	const mairie = searchParams.get("mairie");
+	const [userId, setUserId] = useState(null);
+	const [logged, setLogged] = useState("");
+	const [devices, setDevices] = useState([]);
 
-	const userId = "123456"; // Remplace ceci par la vraie récupération de l'ID utilisateur
+	const searchParams = new URLSearchParams(location.search);
+	const mairieId = searchParams.get("mairie");
+
+	const userIdtemp = "123456"; // Remplace ceci par la vraie récupération de l'ID utilisateur
 
 	const [formData, setFormData] = useState({
 		materialName: "",
@@ -17,7 +22,59 @@ function Formulaire() {
 		description: "",
 	});
 
+	useEffect(() => {
+		setLogged(false);
+		const token = localStorage.getItem("token");
+		if (token)
+			try {
+				const decodedToken = jwtDecode(token);
+				setUserId(decodedToken.id);
+				setLogged(true);
+				fetchCollectionPoint();
+				fetchDevices();
+			} catch (error) {
+				console.error("Erreur lors du décodage du token:", error);
+				setLogged(false);
+			}
+		else navigate("/login");
+	}, []);
+
 	const [photos, setPhotos] = useState([]);
+
+	const [collectionPoint, setCollectionPoint] = useState([]);
+	const fetchCollectionPoint = async () => {
+		console.log(mairieId);
+		try {
+			const response = await fetch(
+				`http://localhost:3333/api/collection-points/${mairieId}"`,
+				{
+					headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+				}
+			);
+			const data = await response.json();
+			setCollectionPoint(data);
+			console.log(data);
+		} catch (error) {
+			console.error(
+				"Erreur lors de la récupération des points de collecte :",
+				error
+			);
+		}
+	};
+
+	const fetchDevices = async () => {
+		try {
+			const response = await fetch("http://localhost:3333/api/devices", {
+				headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+			});
+			const data = await response.json();
+			console.log(data);
+			console.log(devices);
+			setDevices(data);
+		} catch (error) {
+			console.error("Erreur lors de la récupération des appareils :", error);
+		}
+	};
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -44,8 +101,8 @@ function Formulaire() {
 		e.preventDefault();
 
 		const qrCodeData = {
-			userId,
-			mairie,
+			userIdtemp,
+			mairie: mairieId,
 			...formData,
 			photos,
 		};
@@ -114,12 +171,15 @@ function Formulaire() {
 									required
 								>
 									<option value="" disabled>
-										Type de matériel
+										- Type de matériel
 									</option>
-									<option value="ordinateur">Ordinateur</option>
-									<option value="imprimante">Imprimante</option>
-									<option value="ecran">Écran</option>
-									<option value="autre">Autre</option>
+									{devices.map((device) => {
+										return (
+											<option key={device.id} value={device.type}>
+												{device.type}
+											</option>
+										);
+									})}
 								</select>
 							</div>
 
@@ -141,7 +201,7 @@ function Formulaire() {
 									<iframe
 										title="Carte localisation"
 										src={`https://www.google.com/maps?q=${encodeURIComponent(
-											mairie
+											collectionPoint.nom
 										)}&output=embed`}
 										className={styles.map}
 									></iframe>

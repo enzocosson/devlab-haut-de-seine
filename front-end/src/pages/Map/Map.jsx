@@ -66,7 +66,7 @@ function Map() {
 
 	const handleDepositClick = () => {
 		if (selectedPoint) {
-			navigate(`/formulaire?mairie=${encodeURIComponent(selectedPoint.nom)}`);
+			navigate(`/formulaire?mairie=${encodeURIComponent(selectedPoint.id)}`);
 		}
 	};
 
