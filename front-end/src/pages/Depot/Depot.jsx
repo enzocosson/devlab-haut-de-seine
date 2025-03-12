@@ -34,37 +34,39 @@ function Depot() {
 	return (
 		<div className={styles.depot}>
 			<h1>Mes Dépôts</h1>
-			<table className={styles.table}>
-				<thead>
-					<tr>
-						<th>Numéro de Suivi</th>
-						<th>Nom</th>
-						<th>Date</th>
-						<th>Description</th>
-						<th>Lieu de Dépôt</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					{logs.map((log) => (
-						<tr key={log.id}>
-							<td>{log.id}</td>
-							<td>{log.Device.type}</td>
-							<td>{log.date}</td>
-							<td>{log.description}</td>
-							<td>{log.CollectionPoint.nom}</td>
-							<td>
-								<Link
-									to={`/dashboard/tracking/${log.id}`}
-									className={styles.button}
-								>
-									Suivre
-								</Link>
-							</td>
+			<div className={styles.container}>
+				<table className={styles.table}>
+					<thead>
+						<tr>
+							<th>Numéro de Suivi</th>
+							<th>Nom</th>
+							<th>Date</th>
+							<th>Description</th>
+							<th>Lieu de Dépôt</th>
+							<th>Action</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{logs.map((log) => (
+							<tr key={log.id}>
+								<td>{log.id}</td>
+								<td>{log.Device.type}</td>
+								<td>{log.date}</td>
+								<td>{log.description}</td>
+								<td>{log.CollectionPoint.nom}</td>
+								<td>
+									<Link
+										to={`/dashboard/tracking/${log.id}`}
+										className={styles.button}
+									>
+										Suivre
+									</Link>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 }
