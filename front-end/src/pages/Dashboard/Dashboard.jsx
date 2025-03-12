@@ -47,7 +47,7 @@ function Dashboard() {
 					<Link
 						to="/dashboard/find-location"
 						className={
-							location.pathname === "/find-location" ? styles.active : ""
+							location.pathname === "/dashboard/find-location" ? styles.active : ""
 						}
 					>
 						<MapPin />
