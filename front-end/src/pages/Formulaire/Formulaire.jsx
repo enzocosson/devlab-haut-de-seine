@@ -18,7 +18,7 @@ function Formulaire() {
 
 	const [formData, setFormData] = useState({
 		materialName: "",
-		materialType: "",
+		materialTypeId: "",
 		description: "",
 	});
 
@@ -97,20 +97,39 @@ function Formulaire() {
 		}
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	// Création d'un dépôt
+    const handleCreateDepot = async (e) => {
+        e.preventDefault();
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch('http://localhost:3333/api/logs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    device_id: formData.materialTypeId,
+                    collection_point_id: mairieId
+                })
+            });
 
-		const qrCodeData = {
-			userIdtemp,
-			mairie: mairieId,
-			...formData,
-			photos,
-		};
+            if (!response.ok) {
+                throw new Error('Erreur lors de la création du dépôt.');
+            }
 
-		console.log("Form data submitted:", qrCodeData);
-
-		navigate("/confirmation", { state: { qrCodeData } });
-	};
+			const data = await response.json();
+			const qrCodeData = {
+				userIdtemp,
+				materialName: formData.materialName,
+				mairie: collectionPoint.nom
+			};
+			
+			navigate("/confirmation", { state: { qrCodeData } });  // Redirection après la création
+        } catch (error) {
+            console.error('Erreur lors de la création du dépôt:', error);
+        }
+    };
 
 	return (
 		<div className={styles.formulaire}>
@@ -148,7 +167,7 @@ function Formulaire() {
 						</div>
 					</div>
 
-					<form onSubmit={handleSubmit} className={styles.formSection}>
+					<form onSubmit={handleCreateDepot} className={styles.formSection}>
 						<div className={styles.fieldContainers}>
 							<div className={[styles.formGroup]}>
 								<input
@@ -164,9 +183,9 @@ function Formulaire() {
 
 							<div className={[styles.formGroup]}>
 								<select
-									id="materialType"
-									name="materialType"
-									value={formData.materialType}
+									id="materialTypeId"
+									name="materialTypeId"
+									value={formData.materialTypeId}
 									onChange={handleChange}
 									required
 								>
@@ -175,7 +194,7 @@ function Formulaire() {
 									</option>
 									{devices.map((device) => {
 										return (
-											<option key={device.id} value={device.type}>
+											<option key={device.id} value={device.id}>
 												{device.type}
 											</option>
 										);

@@ -11,9 +11,7 @@ function Confirmation() {
 
   // Réduire la taille des données du QR code
   const minimalQrData = JSON.stringify({
-    userId: qrCodeData?.userId,
     materialName: qrCodeData?.materialName,
-    materialType: qrCodeData?.materialType,
     description: qrCodeData?.description,
     mairie: qrCodeData?.mairie,
     photos: qrCodeData?.photos?.map(photo => photo.url) // Ne garder que les URLs des images

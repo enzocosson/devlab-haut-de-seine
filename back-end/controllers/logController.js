@@ -8,8 +8,8 @@ exports.createLog = async (req, res) => {
 	try {
 		// Vérification si le device appartient bien à l'utilisateur
 		const device = await Device.findByPk(device_id);
-		if (!device || device.user_id !== req.user.id) {
-			return res.status(403).json({ message: "Accès interdit à ce device." });
+		if (!device) {
+			return res.status(403).json({ message: "Appareil introuvable" });
 		}
 
 		// Vérification si le point de dépôt existe
