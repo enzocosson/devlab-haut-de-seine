@@ -7,8 +7,7 @@ import { checkUserLogin } from "@/pages/LoginPage/LogAPI.jsx";
 import axios from "axios";
 
 function LoginPage() {
-	const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-	console.log("API Base URL :", API_BASE_URL);
+	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 	const navigate = useNavigate();
 
