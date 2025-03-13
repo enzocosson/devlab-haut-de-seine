@@ -4,6 +4,7 @@ import styles from "./LoginPage.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 
 function RegisterPage() {
+	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 	const navigate = useNavigate();
 	const [userForm, setUserForm] = useState({
 		nom: "",
@@ -17,7 +18,7 @@ function RegisterPage() {
 	const insertUser = async (e) => {
 		e.preventDefault();
 
-		const response = await fetch("http://localhost:3333/api/users", {
+		const response = await fetch(`${API_BASE_URL}/users`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 function Profil() {
+	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 	const [userInfo, setUserInfo] = useState({
 		nom: "",
 		prenom: "",
@@ -42,7 +43,7 @@ function Profil() {
 	// Récupérer les données de l'utilisateur connecté
 	const fetchUserData = async (id) => {
 		try {
-			const response = await fetch(`http://localhost:3333/api/users/${id}`, {
+			const response = await fetch(`${API_BASE_URL}/users/${id}`, {
 				headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 			});
 			const data = await response.json();
@@ -54,7 +55,7 @@ function Profil() {
 
 	const handleUpdate = async () => {
 		try {
-			await fetch(`http://localhost:3333/api/users/${userId}`, {
+			await fetch(`${API_BASE_URL}/users/${userId}`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",

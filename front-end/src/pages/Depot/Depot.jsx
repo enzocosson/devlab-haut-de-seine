@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 function Depot() {
 	const navigate = useNavigate(); // Hook pour la navigation
 	const [logs, setLogs] = useState([]);
+	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+	
 	useEffect(() => {
 		const fetchUserLogs = async () => {
 			try {
@@ -16,7 +18,7 @@ function Depot() {
 					return;
 				}
 
-				const response = await fetch("http://localhost:3333/api/logs/my-logs", {
+				const response = await fetch(`${API_BASE_URL}/logs/my-logs`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},

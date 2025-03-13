@@ -4,6 +4,7 @@ import styles from "./Formulaire.module.scss";
 import { jwtDecode } from "jwt-decode";
 
 function Formulaire() {
+	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -46,7 +47,7 @@ function Formulaire() {
 		console.log(mairieId);
 		try {
 			const response = await fetch(
-				`http://localhost:3333/api/collection-points/${mairieId}"`,
+				`${API_BASE_URL}/collection-points/${mairieId}`,
 				{
 					headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 				}
@@ -64,7 +65,7 @@ function Formulaire() {
 
 	const fetchDevices = async () => {
 		try {
-			const response = await fetch("http://localhost:3333/api/devices", {
+			const response = await fetch(`${API_BASE_URL}/devices`, {
 				headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 			});
 			const data = await response.json();
@@ -102,7 +103,7 @@ function Formulaire() {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3333/api/logs', {
+            const response = await fetch(`${API_BASE_URL}/logs`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

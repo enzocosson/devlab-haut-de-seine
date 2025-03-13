@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import styles from "./TrackingDetails.module.scss";
 
 function TrackingDetails() {
-    const { trackingNumber } = useParams();
+	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const { trackingNumber } = useParams();
 
   // Données fictives pour les étapes de transit
   const initialSteps = [
@@ -37,13 +38,12 @@ function TrackingDetails() {
     const fetchLog = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3333/api/logs/${trackingNumber}"`,
+          `${API_BASE_URL}/logs/${trackingNumber}"`,
           {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           }
         );
         const data = await response.json();
-        console.log("Données reçues :", data);
         setLog(data);
         // setStatus();
       } catch (error) {
@@ -55,9 +55,7 @@ function TrackingDetails() {
     };
 
   useEffect(() => {
-    if (!log.action) return; // Vérifier que `log.action` existe avant d’exécuter le code
-  
-    console.log("Mise à jour des trackingSteps avec log :", log.action);
+    if (!log.action) return;
   
     let increment = 0;
     switch (log.action) {

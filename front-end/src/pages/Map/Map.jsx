@@ -15,6 +15,7 @@ import styles from "./Map.module.scss";
 import { jwtDecode } from "jwt-decode";
 
 function Map() {
+	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 	const mapRef = useRef();
 	const navigate = useNavigate(); // Hook pour la navigation
 	const [selectedPoint, setSelectedPoint] = useState(null);
@@ -40,7 +41,7 @@ function Map() {
 	const fetchCollectionPoints = async () => {
 		try {
 			const response = await fetch(
-				"http://localhost:3333/api/collection-points",
+				`${API_BASE_URL}/collection-points`,
 				{
 					headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 				}
