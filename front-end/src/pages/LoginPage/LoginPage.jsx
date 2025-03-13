@@ -65,7 +65,7 @@ function LoginPage() {
 		try {
 			console.log("email: ", email, "password: ", password);
 			const response = await axios.post(
-				`https://devlab-haut-de-seine-back.vercel.app/api/auth/login`,
+				`${API_BASE_URL}/auth/login`,
 				{
 					email,
 					password,
