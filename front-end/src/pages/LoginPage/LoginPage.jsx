@@ -7,6 +7,9 @@ import { checkUserLogin } from "@/pages/LoginPage/LogAPI.jsx";
 import axios from "axios";
 
 function LoginPage() {
+	const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+	onsole.log("API Base URL :", API_BASE_URL);
+
 	const navigate = useNavigate();
 
 	const [loading, setLoading] = useState(false);
@@ -63,7 +66,7 @@ function LoginPage() {
 		try {
 			console.log("email: ", email, "password: ", password);
 			const response = await axios.post(
-				"http://localhost:3333/api/auth/login",
+				`${API_BASE_URL}/auth/login`,
 				{
 					email,
 					password,
