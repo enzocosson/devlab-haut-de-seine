@@ -1,74 +1,74 @@
 .main {
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-  min-height: 100vh;
-  background-color: var(--white);
-  text-align: center;
-  color: var(--black);
+	max-width: 1200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 1rem;
+	min-height: 100vh;
+	background-color: var(--white);
+	text-align: center;
+	color: var(--black);
 
-  .logo {
-    margin-top: 100px;
-    width: 180px;
-  }
+	.logo {
+		margin-top: 100px;
+		width: 180px;
+	}
 
-  h1 {
-    font-size: 4.5vw;
-    font-weight: 600;
-    line-height: 5vw;
-  }
+	h1 {
+		font-size: 4.5vw;
+		font-weight: 600;
+		line-height: 5vw;
+	}
 
-  h2 {
-    font-size: 1.3rem;
-    color: var(--black);
-    font-weight: 300;
-    line-height: 2rem;
-  }
+	h2 {
+		font-size: 1.3rem;
+		color: var(--black);
+		font-weight: 300;
+		line-height: 2rem;
+	}
 
-  .buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-  
-    a {
-      font-size: 0.9rem;
-      padding: 0.5rem 2rem;
-      border-radius: 500px;
-      text-decoration: none;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-  
-    .give {
-      background-color: var(--green);
-      color: var(--black);
-  
-      &:hover {
-        background-color: #a0d699; // couleur alternative plus claire sans `darken`
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-      }
-    }
-  
-    .search {
-      background-color: var(--blue);
-      color: var(--white);
-  
-      &:hover {
-        background-color: #78c4f0; // couleur alternative plus claire sans `lighten`
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-      }
-    }
-  }
-  
-  
-  .map {
-    margin-top: 50px;
-    width: 600px;
-  }
+	.buttons {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+
+		a {
+			font-size: 0.9rem;
+			padding: 0.5rem 2rem;
+			border-radius: 500px;
+			text-decoration: none;
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+			transition: background-color 0.3s ease;
+		}
+
+		.give {
+			background-color: var(--green);
+			color: var(--black);
+
+			&:hover {
+				background-color: var(
+					--lime
+				); // couleur alternative plus claire sans `darken`
+				box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+			}
+		}
+
+		.search {
+			background-color: var(--blue);
+			color: var(--white);
+
+			&:hover {
+				background-color: #78c4f0; // couleur alternative plus claire sans `lighten`
+				transform: translateY(-3px) scale(1.05);
+				box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+			}
+		}
+	}
+
+	.map {
+		margin-top: 50px;
+		width: 600px;
+	}
 }

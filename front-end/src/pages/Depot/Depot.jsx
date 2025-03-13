@@ -1,71 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Depot.module.scss";
+import { useNavigate } from "react-router-dom";
 
 function Depot() {
-  // Données fictives pour les dépôts
-  const [depots, setDepots] = useState([
-    {
-      id: 1,
-      trackingNumber: "123456789",
-      name: "Ordinateur Portable",
-      photo: "https://via.placeholder.com/100",
-      description: "Ordinateur Dell à recycler",
-      location: "Mairie de Boulogne-Billancourt",
-    },
-    {
-      id: 2,
-      trackingNumber: "987654321",
-      name: "Clavier",
-      photo: "https://via.placeholder.com/100",
-      description: "Clavier mécanique défectueux",
-      location: "Mairie de Courbevoie",
-    },
-    {
-      id: 3,
-      trackingNumber: "1122334455",
-      name: "Téléphone",
-      photo: "https://via.placeholder.com/100",
-      description: "Téléphone Samsung à donner",
-      location: "Mairie de Nanterre",
-    },
-  ]);
+	const navigate = useNavigate(); // Hook pour la navigation
+	const [logs, setLogs] = useState([]);
+	useEffect(() => {
+		const fetchUserLogs = async () => {
+			try {
+				const token = localStorage.getItem("token");
+				if (!token) {
+					alert("Vous devez être connecté.");
+					navigate("/login");
+					return;
+				}
 
-  return (
-    <div className={styles.depot}>
-      <h1>Mes Dépôts</h1>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Numéro de Suivi</th>
-            <th>Nom</th>
-            <th>Photo</th>
-            <th>Description</th>
-            <th>Lieu de Dépôt</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {depots.map((depot) => (
-            <tr key={depot.id}>
-              <td>{depot.trackingNumber}</td>
-              <td>{depot.name}</td>
-              <td>
-                <img src={depot.photo} alt={depot.name} />
-              </td>
-              <td>{depot.description}</td>
-              <td>{depot.location}</td>
-              <td>
-                <Link to={`/dashboard/tracking/${depot.trackingNumber}`} className={styles.button}>
-                  Suivre le Suivi
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+				const response = await fetch("http://localhost:3333/api/logs/my-logs", {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				const data = await response.json();
+				setLogs(data);
+			} catch (error) {
+				console.error("Erreur lors de la récupération des logs:", error);
+			}
+		};
+
+		fetchUserLogs();
+	}, [navigate]);
+
+	return (
+		<div className={styles.depot}>
+			<h1>Mes Dépôts</h1>
+			<div className={styles.container}>
+				<table className={styles.table}>
+					<thead>
+						<tr>
+							<th>Numéro de Suivi</th>
+							<th>Nom</th>
+							<th>Date</th>
+							<th>Description</th>
+							<th>Lieu de Dépôt</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{logs.map((log) => (
+							<tr key={log.id}>
+								<td>{log.id}</td>
+								<td>{log.Device.type}</td>
+								<td>{log.date}</td>
+								<td>{log.description}</td>
+								<td>{log.CollectionPoint.nom}</td>
+								<td>
+									<Link
+										to={`/dashboard/tracking/${log.id}`}
+										className={styles.button}
+									>
+										Suivre
+									</Link>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	);
 }
 
 export default Depot;

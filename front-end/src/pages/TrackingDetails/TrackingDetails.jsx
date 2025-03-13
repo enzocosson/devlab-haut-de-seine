@@ -1,36 +1,101 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./TrackingDetails.module.scss";
 
 function TrackingDetails() {
-  const { trackingNumber } = useParams();
+    const { trackingNumber } = useParams();
 
   // Données fictives pour les étapes de transit
   const initialSteps = [
-    { id: 1, status: "Réceptionné au point relais", date: "2025-01-08 10:00", completed: false },
-    { id: 2, status: "En transit vers le centre de tri", date: "2025-01-08 14:30", completed: false },
-    { id: 3, status: "Arrivé au centre de tri", date: "2025-01-08 18:00", completed: false },
-    { id: 4, status: "Expédié vers la destination finale", date: "2025-01-09 08:45", completed: false },
-    { id: 5, status: "Livré", date: "2025-01-09 15:30", completed: false },
+    { id: 1, status: "Réceptionné au point relais", completed: false },
+    { id: 2, status: "En transit vers le centre de tri", completed: false },
+    { id: 3, status: "Arrivé au centre de tri", completed: false },
+    { id: 4, status: "Expédié vers la destination finale", completed: false },
+    { id: 5, status: "Livré", completed: false },
   ];
-
+  
+  const [logged, setLogged] = useState("");
+  const [currentStatus, setCurrentStatus] = useState("");
   const [trackingSteps, setTrackingSteps] = useState(initialSteps);
+  const [refresh, setRefresh] = useState(false);
+  const [log, setLog] = useState([]);
 
-  const handleStepChange = (id) => {
+  useEffect(() => {
+      setLogged(false);
+      const token = localStorage.getItem("token");
+      if (token)
+        try {
+          setLogged(true);
+          fetchLog();
+        } catch (error) {
+          console.error("Erreur lors du décodage du token:", error);
+          setLogged(false);
+        }
+      else navigate("/login");
+    }, []);
+  
+    const fetchLog = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3333/api/logs/${trackingNumber}"`,
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          }
+        );
+        const data = await response.json();
+        console.log("Données reçues :", data);
+        setLog(data);
+        // setStatus();
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération du depot :",
+          error
+        );
+      }
+    };
+
+  useEffect(() => {
+    if (!log.action) return; // Vérifier que `log.action` existe avant d’exécuter le code
+  
+    console.log("Mise à jour des trackingSteps avec log :", log.action);
+  
+    let increment = 0;
+    switch (log.action) {
+      case "relayPoint":
+        increment = 1;
+        break;
+      case "transitSortingCenter":
+        increment = 2;
+        break;
+      case "sortingCenter":
+        increment = 3;
+        break;
+      case "finalTransit":
+        increment = 4;
+        break;
+      case "delivered":
+        increment = 5;
+        break;
+    }
+  
     setTrackingSteps((prevSteps) =>
       prevSteps.map((step) =>
-        step.id === id - 1 && !step.completed
-          ? {
-              ...step,
-              completed: true,
-            }
+        step.id <= increment && !step.completed
+          ? { ...step, completed: true }
           : step
       )
     );
-  };
+  
+  }, [log]);
+
+  //relayPoint
+  //transitSortingCenter
+  //sortingCenter
+  //finalTransit
+  //delivered
 
   return (
-    <div className={styles.trackingDetails}>
+    <div className={styles.trackingDetails} key={refresh}>
       <h1>Suivi du Dépôt</h1>
       <p>Numéro de Suivi : <strong>{trackingNumber}</strong></p>
 
@@ -43,21 +108,6 @@ function TrackingDetails() {
               <div className={styles.circle}></div>
               <div className={styles.status}>{step.status}</div>
             </div>
-            <div className={styles.date}>{step.date}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className={styles.buttons}>
-        {trackingSteps.map((step) => (
-          <div key={step.id}>
-            <button
-              onClick={() => handleStepChange(step.id)}
-              disabled={step.completed || step.id === 1 && !trackingSteps[0].completed}
-              className={styles.button}
-            >
-              Avancer
-            </button>
           </div>
         ))}
       </div>
