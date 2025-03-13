@@ -18,11 +18,7 @@ function TrackingDetails() {
   const [currentStatus, setCurrentStatus] = useState("");
   const [trackingSteps, setTrackingSteps] = useState(initialSteps);
   const [refresh, setRefresh] = useState(false);
-
-  const forceReload = () => {
-    setRefresh((prev) => !prev); // Change la valeur pour déclencher un re-render
-  };
-
+  const [log, setLog] = useState([]);
 
   useEffect(() => {
       setLogged(false);
@@ -31,7 +27,6 @@ function TrackingDetails() {
         try {
           setLogged(true);
           fetchLog();
-          console.log(trackingSteps);
         } catch (error) {
           console.error("Erreur lors du décodage du token:", error);
           setLogged(false);
@@ -39,7 +34,6 @@ function TrackingDetails() {
       else navigate("/login");
     }, []);
   
-    const [log, setLog] = useState([]);
     const fetchLog = async () => {
       try {
         const response = await fetch(
@@ -49,7 +43,9 @@ function TrackingDetails() {
           }
         );
         const data = await response.json();
+        console.log("Données reçues :", data);
         setLog(data);
+        // setStatus();
       } catch (error) {
         console.error(
           "Erreur lors de la récupération du depot :",
@@ -59,8 +55,12 @@ function TrackingDetails() {
     };
 
   useEffect(() => {
-    let increment = 0
-    switch(log.action){
+    if (!log.action) return; // Vérifier que `log.action` existe avant d’exécuter le code
+  
+    console.log("Mise à jour des trackingSteps avec log :", log.action);
+  
+    let increment = 0;
+    switch (log.action) {
       case "relayPoint":
         increment = 1;
         break;
@@ -77,20 +77,16 @@ function TrackingDetails() {
         increment = 5;
         break;
     }
-
+  
     setTrackingSteps((prevSteps) =>
       prevSteps.map((step) =>
-        step.id == increment && !step.completed
-          ? {
-              ...step,
-              completed: true,
-            }
+        step.id <= increment && !step.completed
+          ? { ...step, completed: true }
           : step
       )
     );
-    forceReload();
-
-  }, []);
+  
+  }, [log]);
 
   //relayPoint
   //transitSortingCenter
@@ -99,7 +95,7 @@ function TrackingDetails() {
   //delivered
 
   return (
-    <div className={styles.trackingDetails}>
+    <div className={styles.trackingDetails} key={refresh}>
       <h1>Suivi du Dépôt</h1>
       <p>Numéro de Suivi : <strong>{trackingNumber}</strong></p>
 
