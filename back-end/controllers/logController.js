@@ -3,7 +3,7 @@ const { Log, Device, CollectionPoint, User } = require("../models");
 
 // Créer un dépôt (log)
 exports.createLog = async (req, res) => {
-	const { device_id, collection_point_id } = req.body;
+	const { device_id, collection_point_id, description } = req.body;
 
 	try {
 		// Vérification si le device appartient bien à l'utilisateur
@@ -22,9 +22,10 @@ exports.createLog = async (req, res) => {
 		const newLog = await Log.create({
 			device_id,
 			collection_point_id,
-			action: "en attente de scan",
+			action: "relayPoint",
 			date: new Date(), // Timestamp actuel
 			performed_by: req.user.id,
+			description: description,
 		});
 
 		res.status(201).json(newLog);
@@ -34,6 +35,20 @@ exports.createLog = async (req, res) => {
 			.status(500)
 			.json({ message: "Erreur serveur lors de la création du dépôt." });
 	}
+};
+
+// Obtenir un appareil par ID
+exports.getLogById = async (req, res) => {
+    try {
+		const cleanedId = req.params.id.replace(/[^\d]/g, "");
+        const log = await Log.findByPk(cleanedId);
+        if (!log) {
+            return res.status(404).json({ message: 'Depot non trouvé' });
+        }
+        res.status(200).json(log);
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la récupération de l\'appareil' });
+    }
 };
 
 // Récupérer l'historique des dépôts pour l'utilisateur connecté

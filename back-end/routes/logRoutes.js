@@ -7,6 +7,7 @@ const { authenticate } = require('../middleware/authMiddleware');
 // Créer un dépôt (log)
 router.post('/', authenticate, logController.createLog);
 router.get('/my-logs', authenticate, logController.getUserLogs);
+router.get('/:id', authenticate, logController.getLogById);
 // Route pour récupérer tous les logs (admin uniquement)
 router.get('/all-logs', authenticate, logController.getAllLogs);
 

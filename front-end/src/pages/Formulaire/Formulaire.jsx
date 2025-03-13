@@ -110,7 +110,8 @@ function Formulaire() {
                 },
                 body: JSON.stringify({
                     device_id: formData.materialTypeId,
-                    collection_point_id: mairieId
+                    collection_point_id: mairieId,
+					description:formData.description
                 })
             });
 
