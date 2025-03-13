@@ -149,7 +149,6 @@ section {
       background-color: rgba(134, 195, 63, 0.15);
       padding: 24px;
       border-radius: 12px;
-      max-width: 30%;
       text-align: left;
 
       .icon {
@@ -325,4 +324,31 @@ section {
     }
   }
 }
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  .cardsContainer {
+    flex-direction: column;
+
+    .card {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .stepsContainer, .testimonialContainer, .buttons {
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 600px) {
+  .cardsContainer {
+    .card {
+      max-width: 30%;
+    }
+  }
+}
+
 
