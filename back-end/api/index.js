@@ -1,37 +1,49 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require("express");
+const dotenv = require("dotenv");
+const { sequelize } = require("./models"); // Instance Sequelize
+const deviceRoutes = require("./routes/deviceRoutes");
+const logsRoutes = require("./routes/logRoutes");
+const userRoutes = require("./routes/userRoutes"); // Nouveau
+const collectionPointRoutes = require("./routes/collectionPointRoutes"); // Nouveau
+const authRoutes = require("./routes/authRoutes"); // Importation ajoutée
 
-var indexRouter = require('../routes/index');
+dotenv.config();
 
-var app = express();
+const app = express();
+const cors = require("cors");
+app.use(cors()); // Autorise les requêtes provenant de n'importe quelle origine
 
-const whitelist = [
-  '*'
-];
+const PORT = process.env.PORT || 3333;
 
-app.use((req, res, next) => {
-  const origin = req.get('referer');
-  const isWhitelisted = whitelist.find((w) => origin && origin.includes(w));
-  if (isWhitelisted) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-  }
-  // Pass to next layer of middleware
-  if (req.method === 'OPTIONS') res.sendStatus(200);
-  else next();
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use("/api/auth", authRoutes); // Ajout des routes d'authentification
+app.use("/api/devices", deviceRoutes);
+app.use("/api/users", userRoutes); // Nouveau
+app.use("/api/collection-points", collectionPointRoutes); // Nouveau
+app.use("/api/logs", logsRoutes); // Nouveau
+
+// Test route
+app.get("/", (req, res) => {
+	res.send(
+		"Bienvenue sur l'API de gestion des appareils, utilisateurs et points de collecte"
+	);
 });
 
-const setContext = (req, res, next) => {
-  if (!req.context) req.context = {};
-  next();
-};
-app.use(setContext);
+console.log("Démarrage du serveur...");
 
-app.use('/', indexRouter);
+sequelize
+	.sync()
+	.then(() => {
+		console.log("Connexion à la base de données réussie.");
+		app.listen(PORT, () => {
+			console.log(`Le serveur tourne sur le port ${PORT}`);
+		});
+	})
+	.catch((error) => {
+		console.error("Erreur de connexion à la base de données :", error);
+	});
 
-module.exports = app;
+console.log("Après la tentative de synchronisation avec Sequelize...");
