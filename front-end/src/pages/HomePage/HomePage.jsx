@@ -98,25 +98,35 @@ function HomePage() {
                             </div>
                             <h3>Déposez votre appareil</h3>
                         </div>
-                      <p>Apportez votre ordinateur inutilisé dans un point de collecte.</p>
+                        <div className={styles.imageContainer}>
+                            <img src="/assets/images/homepage/drop.svg" alt="Illustration du dépôt d'appareil"/>
+                        </div>
+                        <p>Apportez votre ordinateur inutilisé dans un point de collecte pour lui donner une seconde
+                            vie.</p>
                     </div>
                     <div className={styles.step}>
                         <div className={styles.stepTitle}>
                             <div className={styles.icon}>
                                 <GrPowerCycle/>
                             </div>
-                            <h3>Reconditionnement</h3>
+                            <h3>Reconditionnez-le</h3>
                         </div>
-                        <p>Nos experts testent, réparent et optimisent votre appareil.</p>
+                        <div className={styles.imageContainer}>
+                            <img src="/assets/images/homepage/fix.svg" alt="Illustration du dépôt d'appareil"/>
+                        </div>
+                        <p>Nos experts le testent, le réparent et l’optimisent pour une meilleure performance.</p>
                     </div>
                     <div className={styles.step}>
                         <div className={styles.stepTitle}>
                             <div className={styles.icon}>
-                                <GrGift />
+                                <GrGift/>
                             </div>
-                            <h3>Nouvelle vie</h3>
+                            <h3>Offrez une nouvelle vie</h3>
                         </div>
-                        <p>Votre ordinateur est offert à une personne dans le besoin.</p>
+                        <div className={styles.imageContainer}>
+                            <img src="/assets/images/homepage/gift.svg" alt="Illustration du dépôt d'appareil"/>
+                        </div>
+                        <p>Votre ordinateur sera remis à une personne dans le besoin pour un usage utile et durable.</p>
                     </div>
                 </div>
             </section>
@@ -126,13 +136,25 @@ function HomePage() {
                     <h2>Ils ont choisi le reconditionné</h2>
                 </div>
                 <div className={styles.testimonialContainer}>
-                    <div className={styles.testimonial}>
-                        <p>"Grâce à EcoConnect, j'ai pu récupérer un ordinateur fiable pour mes études à moindre coût !"</p>
-                        <h4>- Sophie, étudiante</h4>
+                    <div className={styles.testimonialCard}>
+                        <div className={styles.imageContainer}>
+                            <img src="/assets/images/homepage/pic1.svg" alt="Illustration du dépôt d'appareil"/>
+                        </div>
+                        <div className={styles.testimonial}>
+                            <p>"Grâce à EcoConnect, j'ai pu récupérer un ordinateur fiable pour mes études à moindre
+                                coût !"</p>
+                            <h4>- Sophie, étudiante</h4>
+                        </div>
                     </div>
-                    <div className={styles.testimonial}>
-                        <p>"J'ai donné mon ancien PC au lieu de le jeter, et il a servi à une association. Super initiative !"</p>
-                        <h4>- Marc, donateur</h4>
+                    <div className={styles.testimonialCard}>
+                        <div className={styles.imageContainer}>
+                            <img src="/assets/images/homepage/pic2.svg" alt="Illustration du dépôt d'appareil"/>
+                        </div>
+                        <div className={styles.testimonial}>
+                            <p>"J'ai donné mon ancien PC au lieu de le jeter, et il a servi à une association. Super
+                                initiative !"</p>
+                            <h4>- Marc, donateur</h4>
+                        </div>
                     </div>
                 </div>
             </section>

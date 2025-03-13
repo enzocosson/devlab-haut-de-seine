@@ -12,7 +12,6 @@ section {
 .main {
     position: relative;
     height: calc(100vh - 111px);width: 100%;
-	max-width: 1200px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -122,7 +121,7 @@ section {
 .reconditionSection {
   width: 100%;
   text-align: center;
-  padding: 40px 20px;
+  padding: 40px 20px 120px 20px;
 
   .sectionTitle h2 {
     font-size: 2rem;
@@ -209,7 +208,9 @@ section {
       text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
 
       .stepTitle {
         display: flex;
@@ -226,6 +227,10 @@ section {
         h3 {
           color: var(--green);
         }
+      }
+
+      .imageContainer img {
+        height: 200px;
       }
     }
   }
@@ -254,22 +259,33 @@ section {
     justify-content: space-around;
     gap: 20px;
     max-width: 1280px;
-  }
 
-  .testimonial {
-    background: var(--soft-white);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 45%;
+    .testimonialCard {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      background: var(--soft-white);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-    p {
-      font-style: italic;
-    }
+      .imageContainer img {
+        width: 100px;
+      }
 
-    h4 {
-      color: var(--green);
-      margin-top: 10px;
+      .testimonial {
+        width: 100%;
+
+        p {
+          font-style: italic;
+        }
+
+        h4 {
+          color: var(--green);
+          margin-top: 10px;
+        }
+      }
     }
   }
 }
@@ -278,7 +294,6 @@ section {
   background: var(--green);
   color: white;
   text-align: center;
-  border-radius: 12px;
   width: 100%;
   padding: 60px 20px;
 
