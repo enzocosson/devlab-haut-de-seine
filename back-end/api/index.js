@@ -34,16 +34,20 @@ app.get("/", (req, res) => {
 
 console.log("Démarrage du serveur...");
 
-sequelize
-	.sync()
-	.then(() => {
-		console.log("Connexion à la base de données réussie.");
-		app.listen(PORT, () => {
-			console.log(`Le serveur tourne sur le port ${PORT}`);
-		});
-	})
-	.catch((error) => {
-		console.error("Erreur de connexion à la base de données :", error);
-	});
+console.log("🔍 Vérification des variables sur Vercel...");
+console.log("DB_USER:", process.env.DB_USER || "❌ Manquant");
+console.log("DB_PASS:", process.env.DB_PASS ? "✔️ Définie" : "❌ Manquante");
+console.log("DB_NAME:", process.env.DB_NAME || "❌ Manquant");
+console.log("DB_HOST:", process.env.DB_HOST || "❌ Manquant");
+console.log("DB_DIALECT:", process.env.DB_DIALECT || "❌ Manquant");
 
-console.log("Après la tentative de synchronisation avec Sequelize...");
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Connexion à la base de données réussie.");
+  })
+  .catch((error) => {
+    console.error("Erreur de connexion à la base de données :", error);
+  });
+
+module.exports = app; // ✅ Exportation pour Vercel
