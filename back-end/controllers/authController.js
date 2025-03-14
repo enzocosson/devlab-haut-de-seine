@@ -1,16 +1,14 @@
 // controllers/authController.js
 const { User } = require("../models");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
 	const { nom, email, password, adresse } = req.body;
 	try {
-		const hashedPassword = await bcrypt.hash(password, 10);
 		const user = await User.create({
 			nom,
 			email,
-			password: hashedPassword,
+			password: password,
 			adresse,
 			role: "ROLE_USER", // Par défaut, les utilisateurs ont le rôle USER
 		});
