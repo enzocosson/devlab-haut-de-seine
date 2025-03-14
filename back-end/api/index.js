@@ -1,11 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { sequelize } = require("./models"); // Instance Sequelize
-const deviceRoutes = require("./routes/deviceRoutes");
-const logsRoutes = require("./routes/logRoutes");
-const userRoutes = require("./routes/userRoutes"); // Nouveau
-const collectionPointRoutes = require("./routes/collectionPointRoutes"); // Nouveau
-const authRoutes = require("./routes/authRoutes"); // Importation ajoutée
+const { sequelize } = require("../models"); // Instance Sequelize
+const deviceRoutes = require("../routes/deviceRoutes");
+const logsRoutes = require("../routes/logRoutes");
+const userRoutes = require("../routes/userRoutes"); // Nouveau
+const collectionPointRoutes = require("../routes/collectionPointRoutes"); // Nouveau
+const authRoutes = require("../routes/authRoutes"); // Importation ajoutée
 
 dotenv.config();
 
