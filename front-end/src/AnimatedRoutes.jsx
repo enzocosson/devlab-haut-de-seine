@@ -15,61 +15,62 @@ import MessagingPage from "./pages/MessagingPage/MessagingPage.jsx";
 function AnimatedRoutes() {
   const location = useLocation();
 
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={
-            <Transition key="homePage">
-              <HomePage />
-            </Transition>
-          }
-        />
-        <Route
-          path="/dashboard/*"
-          element={
-            location.pathname === "/dashboard" ? (
-              <Transition key="dashboard">
-                <Dashboard />
-              </Transition>
-            ) : (
-              <Dashboard />
-            )
-          }
-        />
+    return (
+        <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+                <Route
+                    path="/"
+                    element={
+                        <Transition key="homePage">
+                            <HomePage />
+                        </Transition>
+                    }
+                />
 
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+                <Route
+                    path="/dashboard/*"
+                    element={
+                        location.pathname === "/dashboard" ? (
+                            <Transition key="dashboard">
+                                <Dashboard />
+                            </Transition>
+                        ) : (
+                            <Dashboard />
+                        )
+                    }
+                />
 
-        <Route
-          path="/formulaire"
-          element={
-            <Transition key="formulaire">
-              <Formulaire />
-            </Transition>
-          }
-        />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
 
-        <Route
-          path="/confirmation"
-          element={
-            <Transition key="confirmation">
-              <Confirmation />
-            </Transition>
-          }
-        />
-        <Route
-          path="/message"
-          element={
-            // <Transition key="formulaire">
-              <MessagingPage />
-            // </Transition>
-          }
-        />
-      </Routes>
-    </AnimatePresence>
-  );
+                <Route
+                    path="/formulaire"
+                    element={
+                        <Transition key="formulaire">
+                            <Formulaire />
+                        </Transition>
+                    }
+                />
+
+                <Route
+                    path="/confirmation"
+                    element={
+                        <Transition key="confirmation">
+                            <Confirmation />
+                        </Transition>
+                    }
+                />
+                <Route
+                    path="/message"
+                    element={
+                        // <Transition key="formulaire">
+                        <MessagingPage />
+                        // </Transition>
+                    }
+                />
+            </Routes>
+        </AnimatePresence>
+    );
 }
 
 export default AnimatedRoutes;
