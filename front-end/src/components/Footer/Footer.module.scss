@@ -96,3 +96,37 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .footer {
+    padding: 12px 24px;
+  }
+
+  .footerNewsletter {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+
+    .subscription {
+      width: 100% !important;
+
+      .subscriptionTitle {
+        width: 100%;
+      }
+    }
+  }
+
+  .footerSection {
+    flex-direction: column-reverse;
+    gap: 24px;
+
+    ul {
+      flex-direction: column;
+      width: 100%;
+
+      li a {
+        width: 100%;
+      }
+    }
+  }
+}
