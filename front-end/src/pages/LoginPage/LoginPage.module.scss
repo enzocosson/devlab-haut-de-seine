@@ -2,6 +2,7 @@
 	width: 100vw;
 	height: 100vh;
 	display: flex;
+	flex-direction: row;
 	align-items: flex-start;
 	justify-content: space-between;
 	text-align: center;
@@ -163,4 +164,44 @@
 
 .pointer {
 	cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+	.main {
+		flex-direction: column;
+		overflow: auto;
+
+		.loginCard, .registerCard {
+			padding: 12px 24px;
+			width: 100%;
+			height: auto;
+			gap: 12px;
+		}
+
+		.loginForm, .registerForm {
+			padding: 0 !important;
+			gap: 12px !important;
+
+			form {
+				gap: 8px !important;
+			}
+		}
+	}
+
+	.registerForm {
+
+		.fullName {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		form {
+			gap: 8px;
+		}
+
+		.loginInput {
+			gap: 0 !important;
+		}
+	}
 }
